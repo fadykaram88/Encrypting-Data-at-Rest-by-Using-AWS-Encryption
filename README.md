@@ -1,1 +1,0 @@
-# Encrypting-Data-at-Rest-by-Using-AWS-Encryption
