@@ -1,4 +1,5 @@
 # Project 10: Encrypting Data at Rest by Using AWS Encryption Options
+![Encrypting Data at Rest Architecture](https://github.com/fadykaram88/Encrypting-Data-at-Rest-by-Using-AWS-Encryption/blob/main/Final-Arc.png?raw=true)
 
 ## Task 1: Uploading an Object and Seeing Its Default Encryption
 
