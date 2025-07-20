@@ -1,0 +1,55 @@
+Project 10 : Encrypting Data at Rest by Using AWS Encryption 
+Options 
+Task 1 : Uploading an object and seeing its default encryption 
+1 - First download this picture ( Clock ) 
+2 - Search about S3 in the console 
+3 - Create a S3 bucket 
+note : give it unique name and enable Server-side encryption with Amazon S3 managed keys (SSE-S3)
+4 -then choose upload then add files then choose the clock picture then expand permission tab then choose Grant public-read access then choose upload then close 
+5 - to open the picture , choose the file you uploaded then choose Open 
+Task 2 : Creating an AWS KMS key 
+6 - Search about KMS then choose Key Management Service then choose customer managed keys in the left then choose Create Key 
+Key type : Symmetric 
+then next 
+Alias : MyKMSKey
+then next 
+in key administrators search about voclabs  
+then next  
+in key users search about voclabs 
+then next  then next then finish 
+note : voclabs is .............
+search about it and tell me in the comments and don't be Lazy 
+Task 3 : Creating and attaching encrypted data volume on an EC2 instance
+ here we will create an encrypted EBS Volume by using the KMS I have created in the last task then attach it to the EC2 instance then the EC2 instance request the key to decrypt the data so you can see the data 
+7- search about EC2 then instances then launch instance 
+note : put it in Lab VPC  ( project 3) in public subnet  and pair key Vockey and security group which include two inbound roles  
+include Port 22 and protocol TCP and 0.0.0.0/0 and the other role is port 80 and TCP Protocol and 0.0.0.0/0 and the name of the rules are LabSG and one outbound role 
+port range : ALL 
+Protocol : ALL 
+Destination : 0.0.0.0/0
+its name : LabSG
+Also note that this instance is put in availability zone which  is us-east-1c  
+8- in the left , open Volumes then Create volume 
+Volume type : keep the default 
+Size : 1 
+Availability Zone : us-east-1c
+Encryption : Encrypt this volume and choose MyKMSKey 
+then create Volume 
+9 - choose the green link then choose Actions then Attach volume
+Instance : the instance you have created 
+Device name : /dev/sdf
+then attach volume 
+Task 4 : what if we disable the key ?
+10 - search about KMS then choose Customer managed keys then choose the key then choose Key actions then disable   
+11 - go to the EC2 instances then in the left choose volumes then choose the volume you have created then choose Actions then detach volume then refresh again the page then choose Actions then attach volume again 
+here you will see an error say
+Volume vol-..................... cannot be attached as the encrypted volume was unable to access the KMS key 
+12 - we want to analyze the cloudTrail event history so search about the CloudTrail in the console then choose Event history in the left  
+13 - choose the link of DisableKey
+14 - the details in Event record shows that you have disabled the KMS Key 
+15 - so let's re-enable the MyKMSKey 
+16 - Search about KMS then choose customer managed key then choose MyKMSKey then choose Key Actions then enable  
+17 - come back to the EC2 instance then choose Volumes in the left and select the volume  then choose Actions then attach volume then choose the instance and Device name is /dev/sdf then attach volume 
+18 - come back to CloudTrail to see the history of the KMS key in the same step 12 
+19 - I wish if you understand the idea of this project 
+20 - Goodbye 
